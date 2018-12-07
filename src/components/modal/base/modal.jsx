@@ -28,6 +28,8 @@ class Modal extends React.Component {
         // If we're not setting it to a class name, we must omit the prop entirely.
         const bodyOpenClassNameProp = this.props.useStandardSizes ?
             {bodyOpenClassName: classNames('overflow-hidden')} : {};
+
+        const overlayClassName = this.props.overlayClassName ? this.props.overlayClassName : 'modal-overlay-default';
         return (
             <ReactModal
                 appElement={document.getElementById('app')}
@@ -40,9 +42,9 @@ class Modal extends React.Component {
                     beforeClose: classNames('modal-content', this.props.className)
                 }}
                 overlayClassName={{
-                    base: classNames('modal-overlay', this.props.overlayClassName),
-                    afterOpen: classNames('modal-overlay', this.props.overlayClassName),
-                    beforeClose: classNames('modal-overlay', this.props.overlayClassName)
+                    base: classNames('modal-overlay', overlayClassName),
+                    afterOpen: classNames('modal-overlay', overlayClassName),
+                    beforeClose: classNames('modal-overlay', overlayClassName)
                 }}
                 ref={component => {
                     this.modal = component;

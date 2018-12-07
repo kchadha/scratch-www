@@ -101,6 +101,7 @@ class Preview extends React.Component {
                 scripts: 0,
                 sprites: 0
             },
+            projectHasCloudData: false,
             projectId: parts[1] === 'editor' ? '0' : parts[1],
             reportOpen: false,
             singleCommentId: singleCommentId
@@ -251,12 +252,14 @@ class Preview extends React.Component {
                                     .filter(block => block.topLevel).length
                             )
                             .reduce((accumulator, currentVal) => accumulator + currentVal, 0);
+                        const projectHasCloudData = projectData[0].hasCloudData || false;
                         this.setState({
                             extensions: Array.from(extensionSet),
                             modInfo: {
                                 scripts: scripts,
                                 sprites: sprites
-                            }
+                            },
+                            projectHasCloudData: projectHasCloudData
                         });
                     });
                 });
@@ -266,7 +269,8 @@ class Preview extends React.Component {
                 modInfo: {
                     scripts: 0,
                     sprites: 0
-                }
+                },
+                projectHasCloudData: false // TODO this doesn't cover sb2 yet
             });
         }
     }
@@ -573,6 +577,7 @@ class Preview extends React.Component {
                         moreCommentsToLoad={this.props.moreCommentsToLoad}
                         originalInfo={this.props.original}
                         parentInfo={this.props.parent}
+                        projectHasCloudData={this.state.projectHasCloudData}
                         projectHost={this.props.projectHost}
                         projectId={this.state.projectId}
                         projectInfo={this.props.projectInfo}

@@ -45,8 +45,11 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
+}
+
+.modal-overlay-default {
     background-color: transparentize($ui-blue, .3);
+    z-index: 100;
 }
 
 $modal-close-size: 1rem;

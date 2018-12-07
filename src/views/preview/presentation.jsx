@@ -28,6 +28,7 @@ const TopLevelComment = require('./comment/top-level-comment.jsx');
 const ComposeComment = require('./comment/compose-comment.jsx');
 const ExtensionChip = require('./extension-chip.jsx');
 const thumbnailUrl = require('../../lib/user-thumbnail');
+const CloudDataModal = require('../../components/modal/project-info/cloud-data.jsx');
 
 const projectShape = require('./projectshape.jsx').projectShape;
 require('./preview.scss');
@@ -105,6 +106,7 @@ const PreviewPresentation = ({
     onUpdateProjectId,
     originalInfo,
     parentInfo,
+    projectHasCloudData,
     projectHost,
     projectId,
     projectInfo,
@@ -194,6 +196,11 @@ const PreviewPresentation = ({
             { projectInfo && projectInfo.author && projectInfo.author.id && (
                 <React.Fragment>
                     {banner}
+                    {projectHasCloudData && !isLoggedIn ?
+                        <CloudDataModal
+                            isOpen
+                            key="cloud-data-modal"
+                        /> : null}
                     <div className="inner">
                         <FlexRow className="preview-row force-row">
                             <FlexRow className="project-header">
@@ -637,6 +644,7 @@ PreviewPresentation.propTypes = {
     onUpdateProjectId: PropTypes.func,
     originalInfo: projectShape,
     parentInfo: projectShape,
+    projectHasCloudData: PropTypes.bool,
     projectHost: PropTypes.string,
     projectId: PropTypes.string,
     projectInfo: projectShape,
